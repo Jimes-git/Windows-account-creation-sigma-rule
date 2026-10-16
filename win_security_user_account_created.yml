@@ -1,0 +1,41 @@
+title: Windows User Account Created
+id: 001b9470-4ab8-4232-ba1b-cb5609343c50
+status: test
+description: |
+    Detects Windows user account creation using Security event ID 4720.
+    Covers local accounts on workstations and member servers, and domain accounts
+    on domain controllers.
+references:
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4720
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/audit-user-account-management
+    - https://research.splunk.com/endpoint/3fb2e8e3-7bc0-4567-9722-c5ab9f8595eb/
+author: James Moore (moorejimes@outlook.com)
+date: 2026-10-15
+modified: 2026-10-15
+tags:
+    - attack.persistence
+    - attack.t1136.001
+    - attack.t1136.002
+logsource:
+    product: windows
+    service: security
+    definition: |
+        Enable successful auditing for Audit User Account Management and collect
+        the Windows Security event log from relevant endpoints and domain controllers.
+detection:
+    selection:
+        EventID: 4720
+    condition: selection
+fields:
+    - Computer
+    - SubjectUserName
+    - SubjectDomainName
+    - SubjectUserSid
+    - SubjectLogonId
+    - TargetUserName
+    - TargetDomainName
+    - TargetSid
+falsepositives:
+    - Authorized user account creation by administrators or help desk staff
+    - Automated account provisioning and system deployment
+level: medium
