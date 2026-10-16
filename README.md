@@ -6,7 +6,7 @@ so it does not establish false positive rates across other environments. It's im
 Logging requirements:
 - Enable auditing for windows
 - export the windows security event log after creating the test user
-- Install current chainsaw version and mappings (sigma-event-logs-all)
+- Install chainsaw version 2.17.1 and mappings (sigma-event-logs-all) https://github.com/WithSecureOpenSource/chainsaw
 - run the following command
 
 Command for testing against chainsaw (given chainsaw and mappings are installed)
